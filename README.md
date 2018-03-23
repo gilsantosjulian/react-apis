@@ -69,3 +69,54 @@ const element = <div {...props} />
 ```
 
 The idea to JSX is to specify what HTML element to rendered and whic props to pass it. It is a more comfortable way to use.
+
+## Create Custom React Components
+In this step, is needed use a reusabe elements in someway from your application, for this, is a good idea make a a custom react components. It is very helpfull in order to mantein our app performance. 
+
+We going to make a *React.createElement* function that is useful to create our element:
+
+```
+const Message = () => <div>Hello World</div>
+const element = (
+    <div>
+        {React.createElement(Message, {})}
+    </div>
+)
+```
+
+Now, wirte React.createElement funcion is more easy usin babel, just only we have to write in angular brackets <Message /> passing into the props, for instance (it happen because is the same, only change the sintax):
+
+```
+const Message = (props) => <div>{props.msg}</div>
+const element = (
+    <div>
+        <Message {msg: 'Hello World'}/>
+    </div>
+)
+```
+
+And we can call it every time that we need:
+```
+const Message = (props) => <div>{props.msg}</div>
+const element = (
+    <div>
+        <Message msg={'Hello World'} />
+        <Message msg={'Good Bye'} />
+    </div>
+)
+```
+
+So we can use it like children component too:
+```
+const Message = (props) => <div>{props.msg}</div>
+const element = (
+    <div>
+        <Message>
+            Hello World
+            <Message>
+                Good Bye
+            </Message>
+        </Message>
+    </div>
+)
+```
