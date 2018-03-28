@@ -120,3 +120,61 @@ const element = (
     </div>
 )
 ```
+
+## Validate Custom React Component Props with PropTypes
+In this lesson we'll learn about how you can use the prop-types module to validate a custom React component's props.
+
+The first thing that we going to do, is create a new function that recive props:
+```
+function SayHello(props) {
+            return(
+                <div>
+                    Hello {props.firstname} {props.lastName}
+                </div>
+            )            
+        }
+```
+
+Now we have to describe our props to passed into the function, lest see:
+```
+SayHello.proptypes = {
+            firstName(props, propName, componentName) {
+                if(typeof props[propName] !== 'string') {
+                    return new Error(`Hey, you should pass a string for ${propName} in componentName ${componentName} but you passed a ${typeof props[propName]}`)
+                }
+            }
+        }
+```
+
+One best form to rewrite this is:
+```
+const PropTypes = {
+            string(props, propName, componentName) {
+                if(typeof props[propName] !== 'string') {
+                    return new Error(`Hey, you should pass a string for ${propName} in componentName ${componentName} but you passed a ${typeof props[propName]}`)
+                }
+            }
+        } 
+
+        SayHello.propTypes = {
+            firstName: PropTypes.string,
+            lastName: PropTypes.string,
+        }
+```
+
+However, we have to include the library on top of the our file and remove the proptypes const:
+```
+ <script src='https://unpkg.com/prop-types@15.6.0/prop-types.js'></script>
+```
+
+Until this step, we can check our props to passed into, but we can make them require too. First we going to pass a unknown prop, and define the others like require:
+```
+<div>
+    Hello {props.firstname} {props.lastName || 'Unknown'} 
+</div>
+
+SayHello.propTypes = {
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+}
+```
