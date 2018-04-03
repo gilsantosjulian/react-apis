@@ -178,3 +178,43 @@ SayHello.propTypes = {
     lastName: PropTypes.string.isRequired,
 }
 ```
+
+
+## Conditionally Render A React Component
+In this step we explore JSX a little further and solidify in our minds that JSX is simply syntax sugar on top of a fairly simple React API: React.createElement
+
+First one, we can to pass props into a function called 'Message - our component', and if exist, show a message, if not, show a 'No Message texts' using a simple conditional.
+```
+function Message({message}) {
+    if(!message) {
+        return <div>No Message</div>
+    }
+    return <div>{message}</div>        
+}
+```
+
+We can to rewrite our code returning a div tag, using React.createElement() method, making a little more fancy let's see:
+```
+function Message({message}) {
+    return(
+        message
+        ? React.createElement('div', null, message)
+        : React.createElement('div', null, 'No Message')
+    );        
+}
+```
+
+At the final, we can to do better our code, involved whole into a div and returning new divs:
+```
+function Message({message}) {
+    return(
+        <div>
+            {
+                message
+                ? <div>{message}</div>
+                : <div>No Message</div>
+                }
+        </div>
+    );               
+}
+```

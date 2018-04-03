@@ -1,0 +1,39 @@
+<body>
+    <div id='root'></div>
+    <script src='https://unpkg.com/react@16.2.0/umd/react.development.js'></script>
+    <script src='https://unpkg.com/react-dom@16.2.0/umd/react-dom.development.js'></script>
+    <script src='https://unpkg.com/babel-standalone@6.26.0/babel.js'></script>
+    <script src='https://unpkg.com/prop-types@15.6.0/prop-types.js'></script>
+    <script type='text/babel'>
+        const rootElement = document.getElementById('root')
+        
+        function Message({message}) {
+            if(!message) {
+                return <div>No Message</div>
+            }
+            return <div>{message}</div>        
+        }
+
+        function Message({message}) {
+            return(
+                message
+                ? React.createElement('div', null, message)
+                : React.createElement('div', null, 'No Message')
+            );       
+        }
+
+        function Message({message}) {
+            return(
+                <div>
+                {
+                    message
+                    ? <div>{message}</div>
+                    : <div>No Message</div>
+                }
+                </div>
+            );       
+        }
+
+        ReactDOM.render(<Message message={null} />, rootElement)
+    </script>
+</body>
