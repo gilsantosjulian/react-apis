@@ -1,5 +1,22 @@
-<div id='root'></div>
-<script tyoe='text/javascript'>
-const rootElement = document.getElementById('root')
-
-</script>
+<body>
+    <div id='root'></div>
+    <script src='https://unpkg.com/react@16.2.0/umd/react.development.js'></script>
+    <script src='https://unpkg.com/react-dom@16.2.0/umd/react-dom.development.js'></script>
+    <script type='text/javascript'>
+        const rootElement = document.getElementById('root')
+        // const element = document.createElement('div')
+        // element.textContent = 'Hello Word'
+        // element.className = 'container'
+        // rootElement.appendChild(element)
+        const element = React.createElement(
+            'div',
+            {
+                className: 'container',
+                children: 'Hello World'
+            }
+        )
+        console.log('element')
+        console.log(element)
+        ReactDOM.render(element, rootElement)
+    </script>
+</body>
