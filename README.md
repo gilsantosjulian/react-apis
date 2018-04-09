@@ -281,3 +281,60 @@ setInterval(tick, 1000)
 ```
 
 If you inspect again the html file in your browser, you can see that all div is updated. Thats meand all the page is rendered.
+
+## Style React Components with className and In Line Styles
+In this step, we'll learn about how you can style react components using the style prop and className prop. We will go over how these props are differant than regular html style and class properties. Style, in JSX, takes an object, camel casing the property keys like borderRadius instead of border-radius.
+
+First we are going to include our object style (normally we add the styles in the string form), let's see:
+```
+const rootElement = document.getElementById('root')
+const element = (
+    <div>
+        <div style={{ paddingLeft: '20px' }}>box</div>
+        <div style={{ paddingLeft: 20 }}>box</div> you can write it in only number
+    </div>)
+ReactDOM.render(element, rootElement)
+```
+
+Ok, is very good for now, but we can inlcude our styles only to calling our CSS class with the key word *Clasname*. First include our style and after calling our key word:
+
+```
+<style>
+    .box {
+        padding-left: 20
+    }
+</style>
+const element = (
+    <div>
+        <div className='box'>box</div>
+    </div>
+)
+```
+
+Well we are going to be more specific, let's try (Adding more style):
+```
+.box-small {
+    width: 60px;
+    height: 60px;
+    border: 1px solid gray;
+}
+const element = (
+    <div>
+        <div className='box box-small'>box</div>
+    </div>
+)
+```
+
+Now we can to make our Box component, just into a new function, let's see passing three params (className, style and another params - rest):
+```
+function Box({className, style, rest}) {
+    return(
+        <div 
+            className={`box ${className}`} //Using interpolation
+            style={{paddingLeft: 20, ...style}}
+        >
+            {...rest}
+        </div>
+    );
+}
+```

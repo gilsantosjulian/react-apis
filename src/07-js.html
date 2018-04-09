@@ -1,0 +1,55 @@
+<body>
+    <div id='root'></div>
+    <script src='https://unpkg.com/react@16.2.0/umd/react.development.js'></script>
+    <script src='https://unpkg.com/react-dom@16.2.0/umd/react-dom.development.js'></script>
+    <script src='https://unpkg.com/babel-standalone@6.26.0/babel.js'></script>
+    <style>
+        .box {
+            padding-left: 20;
+        }
+        .box-small {
+            width: 60px;
+            height: 60px;
+            border: 1px solid gray;
+        }
+        .box-medium {
+            width: 80px;
+            height: 80px;
+            border: 1px solid gray;
+        }
+        .box-large {
+            width: 120px;
+            height: 120px;
+            border: 1px solid gray;
+        }
+    </style>
+    <script type='text/babel'>
+        const rootElement = document.getElementById('root')
+
+        function Box({className, style, rest}) {
+            return(
+                <div 
+                    className={`box ${className}`} //Using interpolation
+                    style={{paddingLeft: 20, ...style}}
+                    >                    
+                    {...rest}
+                </div>
+            );
+        }
+
+        const element = (
+            <div>
+                <div style={{ paddingLeft: '20px' }}>box</div>
+                <div style={{ paddingLeft: 20 }}>box</div>
+                <div className='box'>box</div>
+                <div className='box box-small'>box</div>
+
+                <Box className='box-small' style={{ backgroundColor: 'lightblue' }}>Small Box</Box>
+                <Box className='box-medium' style={{ backgroundColor: 'pink' }}>Medium Box</Box>
+                <Box className='box-large' style={{ backgroundColor: 'orange' }}>Large Box</Box>
+
+            </div>
+        )
+		ReactDOM.render(element, rootElement)		
+    </script>
+</body>
