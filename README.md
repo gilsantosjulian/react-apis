@@ -218,3 +218,66 @@ function Message({message}) {
     );               
 }
 ```
+
+## Rerender a React Application
+In this step, we'll learn how we can call ReactDOM.render repeatedly with brand new React Elements and React will preserve element focus and only do the minimal required DOM operations for the re-render.
+
+The first thing that we are going to do, is display our local time, for this only we have to use the 'toLocaleTimeString()' method:
+
+```
+const rootElement = document.getElementById('root')
+const time = new Date().toLocaleTimeString()
+const element = <div>It is {time}</div>
+```
+
+Now we start to impproving our code put into the code in one function and call it every second using a setInterval() method, let see:
+```
+function tick(){
+    const rootElement = document.getElementById('root')
+    const time = new Date().toLocaleTimeString()
+	const element = <div>It is {time}</div>
+	ReactDOM.render(element, rootElement)
+}
+tick()
+setInterval(tick, 1000)
+```
+
+In roder to see the focus of the ReactDOM, we going to put into a text input tag our time:
+```
+function tick(){
+    const rootElement = document.getElementById('root')
+    const time = new Date().toLocaleTimeString()
+	const element = 
+        <div>
+            It is 
+            <input value={time}/>
+            <input value={time}/>
+        </div>
+	ReactDOM.render(element, rootElement)
+}
+tick()
+setInterval(tick, 1000)
+```
+
+Ok now we are going to see how ReactDOM help us to focus only in the div that is doing updated. If you inspect the html file in browser, you can see that the only html tag that is updated is the <input />. Only render the component that is necesary.
+
+But is very different if we use the common javascript using the innerHTML param for include the same code, passing it into a string variable, something like this:
+```
+function tick(){
+    const rootElement = document.getElementById('root')
+    const time = new Date().toLocaleTimeString()
+	const element = `
+        <div>
+            It is 
+            <input value=${time}/>
+			<input value=${time}/>
+        </div>
+    `
+    rootElement.innerHTML = element
+	//ReactDOM.render(element, rootElement)
+}
+tick()
+setInterval(tick, 1000)
+```
+
+If you inspect again the html file in your browser, you can see that all div is updated. Thats meand all the page is rendered.
