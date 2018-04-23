@@ -338,3 +338,12 @@ function Box({className, style, rest}) {
     );
 }
 ```
+
+## Use event handlers with React
+In this part we are going to how React catch the events in the HTML elements and take care and delegation. 
+
+Fist we going to create a onClick event for a button, and pass it inline arrow function that will modify the state and increment our count variable.
+
+```
+    <button onClick={() => setState({ eventCount: state.eventCount + 1 })} >Button</button>
+```
